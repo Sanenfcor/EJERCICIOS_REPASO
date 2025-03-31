@@ -56,6 +56,7 @@
     /* SOL = días en la superficie de Marte */
     $MAX_sol = $manifesto["max_sol"]; //La cantidad de días marcianos que ha durado la misión, está a su última actualización
 
+    $fotos_por_sol = 0;
     foreach($manifesto["photos"] as $manifest){
         if($manifest["sol"] == $sol){
             $fotos_por_sol = $manifest["total_photos"]; // Indica la cantidad de fotos por cada "sol" para utilizar esa cantidad en la paginación, este valor está mal
@@ -109,6 +110,8 @@
         </form>
     </div>
 
+    <!-- ¿Se podría hacer otro formulario para seleccionar el rover que queremos usar? -->
+
     <!-- Aquí verificamos si los "sol" están vacíos o no, pues hay alguno que no tiene fotos -->
     <?php
     if(count($fotos) != null){ ?>
@@ -130,7 +133,7 @@
             </table>
         </div>
     <?php } else { ?>
-        <h1>No tiene fotos</h1>
+        <h1>Este ROVER no tiene fotos</h1>
     <?php } ?>
 
     <!-- PAGINACIÓN INFERIOR -->
