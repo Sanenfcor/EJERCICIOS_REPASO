@@ -104,7 +104,7 @@
     <!-- Formulario para cambiar entre los diferentes "sol", podría mejorarlo para que no permita un número menor a 0 ni superior al máximo de "sol"-->
     <div>  
         <form method="get">
-            <label>Seleccione el "sol": </label>
+            <label>Seleccione el "sol" que quiere ver: </label>
             <input type="number" id="sol" name="sol" placeholder="max. <?= $MAX_sol ?>">
             <input type="submit" value="Enviar">
         </form>
@@ -116,17 +116,23 @@
     <?php
     if(count($fotos) != null){ ?>
         <div>
-            <table border="5px solid black">
+            <table border="5px solid black" style="margin:auto; margin-top:2rem; margin-bottom:2rem; text-align:center; border-collapse: collapse;">
                 <thead>
-                    <th style="height:300px; width:300px;"><h1>ID</h1></th>
-                    <th><h1>IMG</h1></th>
+                    <tr>
+                        <th style="height:300px; width:300px;"><h1>ID</h1></th>
+                        <th><h1>IMG</h1></th>
+                        <th style="height:300px; width:300px;"><h1>Cámara</h1></th>
+                        <th style="height:300px; width:300px;"><h1>Fecha</h1></th>
+                    </tr>    
                 </thead>
                 <tbody>
                     <?php
                     foreach($fotos as $foto){ ?>
                         <tr>
-                            <td><h3><?php echo $foto["id"] ?></h3></td>
-                            <td><img src="<?php echo $foto["img_src"] ?>" alt="fotito" height="300px" width="300px"></td>
+                            <td><h3><?= $foto["id"] ?></h3></td>
+                            <td><img src="<?= $foto["img_src"] ?>" alt="fotito" height="300px" width="300px"></td>
+                            <td><h3><?= $foto["camera"]["name"] ?></h3></td>
+                            <td><h3><?= $foto["earth_date"] ?></h3></td>
                         </tr>
                     <?php } ?>
                 </tbody>
