@@ -13,14 +13,32 @@
     <?php
     $api_key = "G8d3T0PthqgqDJWhdtFSKgYPYDZFgU5JqWNAgGYC";
 
-    if(isset($_GET["page"])){
-        $pag = $_GET["page"];
-        if($pag < 2){
-            $pag = 1;
-        }
-    } else{
-        $pag = 1;
+    if(isset($_GET["indice"])) {
+        $indice = $_GET["indice"];
+    } else {
+        $indice = 0;
     }
+
+    $siguiente = $indice+5;
+    $anterior = $indice-5;
+
+    ?>
+
+    <?php if($indice > 5){ ?>
+        <a href="index_clase.php?indice=<?= $anterior ?>" style="border: solid 1px; padding:3px;"><<</a>
+    <?php } else { ?>
+        <a href="" hidden><<</a>
+    <?php } ?>
+    <!-- 
+    <a href="index_clase.php?indice=<?= $anterior ?>">
+        Anterior
+    </a> -->
+
+    <a href="index_clase.php?indice=<?= $siguiente ?>">
+        Siguiente
+    </a>
+
+    <?php
 
     if(isset($_GET["sol"])){
         $sol = $_GET["sol"];
@@ -34,7 +52,7 @@
 
     //Primera llamada a la API
 
-    $apiUrl = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=$sol&page=$pag";
+    $apiUrl = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=$sol";
     $curl = curl_init(); // Inicializamos la libreria cUrl
     curl_setopt($curl, CURLOPT_URL, $apiUrl); // Indicamos que la conexion va por URL e indicamos la URL
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Para habilitar la transferencia de datos
@@ -44,8 +62,8 @@
     curl_close($curl);
 
     $datos = json_decode($respuesta, true);
+    //echo (var_dump($datos));
     $fotos = $datos["photos"];
-
 
     //Segunda llamada a la API, aquí obtenemos los datos de las fotos totales, el total de "sol" y la cantidad de fotos por cada uno
 
@@ -73,39 +91,9 @@
 
     $ultima_pagina = ceil($fotos_por_sol/25); // Última página que ayuda en la paginación
 
-    ?>
-
-    <!-- PAGINACIÓN SUPERIOR -->
-
-    <div style="border: solid 1px; width:fit-content; padding:3px;">
-        <?php if($pag >= 3){ ?>
-            <a href="?sol=<?=$sol?>&page=<?= 1 ?>" style="border: solid 1px; padding:3px;"><<</a>
-        <?php } else { ?>
-            <a href="" hidden><<</a>
-        <?php } ?>
-
-        <?php if($pag > 1){ ?>
-            <a href="?sol=<?=$sol?>&page=<?= $pag - 1 ?>" style="border: solid 1px; padding:3px;"><</a>
-        <?php } else { ?>
-            <a href="" hidden><</a>
-        <?php } ?>
-
-        <?php if($pag < $ultima_pagina){ ?>
-            <a href="?sol=<?=$sol?>&page=<?= $pag + 1 ?>" style="border: solid 1px; padding:3px;">></a>
-        <?php } else { ?>
-            <a href="" hidden>></a>
-        <?php } ?>
-
-        <?php if($pag <= ($ultima_pagina - 2)){ ?>
-            <a href="?sol=<?=$sol?>&page=<?= $ultima_pagina ?>" style="border: solid 1px; padding:3px;">>></a>
-        <?php } else { ?>
-            <a href="" hidden>>></a>
-        <?php } ?>
-    </div>
-    
+    ?>    
 
     <h1>FOTOS ROVER</h1>
-    <h3>Página <?= $pag ?></h3> <!-- Indicamos la página en la que nos encontramos -->
     <h3>Sol <?= $sol ?></h3> <!-- Indicamos el "sol" en el que nos encontramos -->
     <h3>Fotos por sol: <?= $fotos_por_sol ?></h3> <!-- Indicamos el "sol" en el que nos encontramos -->
     
@@ -135,14 +123,18 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach($fotos as $foto){ ?>
+                    $contador = 0;
+                    while($contador < 5){ ?>
                         <tr>
-                            <td><h3><?= $foto["id"] ?></h3></td>
-                            <td><img src="<?= $foto["img_src"] ?>" alt="fotito" height="300px" width="300px"></td>
-                            <td><h3><?= $foto["camera"]["name"] ?></h3></td>
-                            <td><h3><?= $foto["earth_date"] ?></h3></td>
+                            <td><h3><?= $fotos[$indice]["id"] ?></h3></td>
+                            <td><img src="<?= $fotos[$indice]["img_src"] ?>" alt="fotito" height="300px" width="300px"></td>
+                            <td><h3><?= $fotos[$indice]["camera"]["name"] ?></h3></td>
+                            <td><h3><?= $fotos[$indice]["earth_date"] ?></h3></td>
                         </tr>
-                    <?php } ?>
+                    <?php 
+                    $contador++;
+                    $indice++;
+                    } ?>
                 </tbody>
             </table>
         </div>
@@ -152,28 +144,5 @@
 
     <!-- PAGINACIÓN INFERIOR -->
 
-    <?php if($pag >= 3){ ?>
-        <a href="?sol=<?=$sol?>&page=<?= 1 ?>">Inicio</a>
-    <?php } else { ?>
-        <a href="" hidden>Inicio</a>
-    <?php } ?>
-
-    <?php if($pag > 1){ ?>
-        <a href="?sol=<?=$sol?>&page=<?= $pag - 1 ?>">Anterior</a>
-    <?php } else { ?>
-        <a href="" hidden>Anterior</a>
-    <?php } ?>
-
-    <?php if($pag < $ultima_pagina){ ?>
-        <a href="?sol=<?=$sol?>&page=<?= $pag + 1 ?>">Siguiente</a>
-    <?php } else { ?>
-        <a href="" hidden>Siguiente</a>
-    <?php } ?>
-
-    <?php if($pag < ($ultima_pagina - 2)){ ?>
-            <a href="?sol=<?=$sol?>&page=<?= $ultima_pagina ?>">Final</a>
-        <?php } else { ?>
-            <a href="" hidden>Final</a>
-        <?php } ?>
 </body>
 </html>
