@@ -16,7 +16,7 @@
     if(isset($_GET["date"])){
         $date = $_GET["date"];
     } else{
-        $date = "2025-03-30";
+        $date = "";
     }
 
     $apiUrl = "https://api.nasa.gov/planetary/apod?api_key=$api_key&date=$date";
