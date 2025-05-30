@@ -7,16 +7,20 @@
 
     switch($metodo){
         case "GET":
-            manejarGet($_conexion);
+            //echo json_encode(["metodo" => "GET"]);
+            manejarGET($_conexion);
             break;
         case "POST":
+            //echo json_encode(["metodo" => "POST"]);
             manejarPOST($_conexion, $entrada);
             break;
         case "PUT":
-            echo json_encode(["metodo" => "put"]);
+            //echo json_encode(["metodo" => "PUT"]);
+            manejarPUT($_conexion, $entrada);
             break;
         case "DELETE":
-            echo json_encode(["metodo" => "delete"]);
+            //echo json_encode(["metodo" => "DELETE"]);
+            manejarDELETE($_conexion, $entrada);
             break;
     }
 

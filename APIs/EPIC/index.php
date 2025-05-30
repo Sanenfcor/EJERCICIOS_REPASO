@@ -16,7 +16,7 @@
     if(isset($_GET["date"])){
         $date = $_GET["date"];
     } else{
-        $date = "2025-04-05";
+        $date = date("Y-m-d");
     }
 
     //Primera llamada a la API
@@ -25,8 +25,8 @@
     $curl = curl_init(); // Inicializamos la libreria cUrl
     curl_setopt($curl, CURLOPT_URL, $apiUrl); // Indicamos que la conexion va por URL e indicamos la URL
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Para habilitar la transferencia de datos
-    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($curl, CURLOPT_USERPWD, $api_key . ":");
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC); 
+    curl_setopt($curl, CURLOPT_USERPWD, $api_key . ":"); 
     $respuesta = curl_exec($curl);
     curl_close($curl);
 
@@ -46,9 +46,6 @@
         </form>
     </div>
 
-    <!-- ¿Se podría hacer otro formulario para seleccionar el rover que queremos usar? -->
-
-    <!-- Aquí verificamos si los "sol" están vacíos o no, pues hay alguno que no tiene fotos -->
     <?php
     if(count($datos) != null){ ?>
         <div>

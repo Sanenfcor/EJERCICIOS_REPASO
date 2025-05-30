@@ -1,0 +1,19 @@
++ Crear un archivo endpoint_actores.php donde, al realizar un GET, se muestren:
+++ Todos los actores si no se indica nada
+++ Todos los actores con un determinado last_name, si incluimos en la url el parámetro last_name
+++ PUT
+++ DELETE
+
++ Crear un archivo endpoint_addresses.php donde, al realizar un GET, se muestren:
+++ Todas las direcciones si no se indica nada
+++ Todas las direcciones de un district en concreto si incluimos en la url el parámetro district
+++ PUT
+++ DELETE
+
++ Crear un archivo enpoint_payments.php donde, al realizar un GET, se muestren:
+++ Todos los pagos si no se indica nada
+++ Todos los pagos dentro de un rango de cantidad, si se especifican los parámetros p_desde y p_hasta
+++ Todos los pagos dentro de un rango de fechas, si se especifican los parámetros f_desde y f_hasta (dia, mes y año)
+++ Todos los parámetros pueden funcionar a la vez
+++ PUT
+++ DELETE

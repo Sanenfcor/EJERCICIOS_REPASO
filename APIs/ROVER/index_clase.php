@@ -155,7 +155,5 @@
         <h1>Este ROVER no tiene fotos</h1>
     <?php } ?>
 
-    <!-- PAGINACIÓN INFERIOR -->
-
 </body>
 </html>

@@ -4,7 +4,7 @@
     $_usuario = "root";
     //$_contrasena = "sanenfcor";
     $_contrasena = "root";
-    $_bd = "world";
+    $_bd = "sakila";
 
     try {
         $_conexion = new PDO("mysql:host=$_servidor;dbname=$_bd", $_usuario, $_contrasena);

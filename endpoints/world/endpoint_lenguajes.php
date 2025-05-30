@@ -7,16 +7,20 @@
 
     switch($metodo){
         case "GET":
-            manejarGet($_conexion);
+            //echo json_encode(["metodo" => "GET"]);
+            manejarGET($_conexion);
             break;
         case "POST":
+            //echo json_encode(["metodo" => "POST"]);
             manejarPOST($_conexion, $entrada);
             break;
         case "PUT":
-            echo json_encode(["metodo" => "put"]);
+            //echo json_encode(["metodo" => "PUT"]);
+            manejarPUT($_conexion, $entrada);
             break;
         case "DELETE":
-            echo json_encode(["metodo" => "delete"]);
+            //echo json_encode(["metodo" => "DELETE"]);
+            manejarDELETE($_conexion, $entrada);
             break;
     }
 
@@ -47,5 +51,32 @@
             "isOfficial" => $entrada["isOfficial"],
             "percentage" => $entrada["percentage"]
         ]);
+        
+        echo json_encode(["mensaje" => "Lenguaje actualizado exitosamente"]);
     }
+
+    function manejarPUT($_conexion, $entrada){
+        $sql = "UPDATE city SET countryCode = :countryCode, district = :district, population = :population
+            WHERE name = :name";
+        $stmt = $_conexion->prepare($sql);
+        $stmt -> execute([
+            "name" => $entrada["name"],
+            "countryCode" => $entrada["countryCode"],
+            "district" => $entrada["district"],
+            "population" => $entrada["population"]
+        ]);
+
+        echo json_encode(["mensaje" => "Lenguaje actualizado exitosamente"]);
+    }
+
+    function manejarDELETE($_conexion, $entrada){
+        $sql = "DELETE FROM city WHERE name = :name";
+        $stmt = $_conexion->prepare($sql);
+        $stmt->execute([
+            "name" => $entrada["name"]
+        ]);
+
+        echo json_encode(["mensaje" => "Lenguaje eliminado exitosamente"]);
+    }
+
 ?>

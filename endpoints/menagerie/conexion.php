@@ -1,9 +1,7 @@
 <?php
     $_servidor = "localhost";
-    //$_usuario = "Sanenfcor";
-    $_usuario = "root";
-    //$_contrasena = "sanenfcor";
-    $_contrasena = "root";
+    $_usuario = "Sanenfcor";
+    $_contrasena = "sanenfcor";
     $_bd = "world";
 
     try {
