@@ -56,6 +56,14 @@
             $cond[] = "payment_date >= :f_desde";
             $param["f_desde"] = $_GET["f_desde"];
         }
+        if (isset($_GET["customer"])) {
+            $cond[] = "customer_id = :customer_id";
+            $param["customer_id"] = $_GET["customer"];
+        }
+        if (isset($_GET["staff"])) {
+            $cond[] = "staff_id = :staff_id";
+            $param["staff_id"] = $_GET["staff"];
+        }
 
         $sql = "SELECT * FROM payment";
         if(!empty($cond)){

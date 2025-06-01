@@ -17,3 +17,9 @@
 ++ Todos los parámetros pueden funcionar a la vez
 ++ PUT
 ++ DELETE
+
+--  Crear una página .php donde se muestren por defecto en una tabla las 10 primeras filas de la tabla payment. 
+    En esa página habrá al menos dos filtros que elegiréis a vuestro gusto, no pudiendo repetirse los hechos en clase. 
+    Esos filtros podrán funcionar de manera conjunta o individual. Además, habrá enlaces para pasar a la siguiente página (y que se muestren las siguientes 10 filas), o a la anterior (lo mismo pero al revés). 
+    La página tendrá que invocar a la api, puesto que ésta será la que haga toda la lógica con la base de datos. 
+    La página que crees no tendrá nada de interacción con la bbdd.
